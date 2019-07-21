@@ -1,0 +1,6 @@
+{'name':'Priyam Shah','phno':'7531982461','user_type':'rider','email':'priyam@abc.com','username':'priyam','password':'Priyam112@','lat':'19.137051','long':'72.855537'}
+{'name':'Somesh','phno':'7532982461','user_type':'rider','email':'somesh@abc.com','username':'somesh','password':'Somesh112@','lat':'19.137151','long':'72.856537'}
+{'name':'Devansh Solanki','phno':'7531782461','user_type':'driver','email':'devansh@abc.com','username':'devansh','password':'Devansh112@','lat':'19.137061','long':'72.855587','vehicle':'WagonR','vehicle_no':'MH02BA6651'}
+{'name':'Mihir Shah','phno':'7591782461','user_type':'driver','email':'ms@abc.com','username':'mihir','password':'Mihir112@','lat':'19.137081','long':'72.855987','vehicle':'Maruti Suzuki','vehicle_no':'MH02BA6851'}
+{'name':'Amit Bhujbal','phno':'7591782761','user_type':'driver','email':'amit@abc.com','username':'amit','password':'Amit112@','lat':'19.137781','long':'72.855087','vehicle':'Swift Dzire','vehicle_no':'MH02DA6851'}
+{'name':'Siddharth KUV','phno':'7591782791','user_type':'driver','email':'siddharth@abc.com','username':'siddharth','password':'Siddharth112@','lat':'19.137782','long':'72.855089','vehicle':'Ertiga','vehicle_no':'MH02DA6871'}
