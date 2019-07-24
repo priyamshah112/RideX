@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <title>RideX</title>
+
+    <style>
+    @import url('https://fonts.googleapis.com/css?family=Roboto');
+html{
+  width:100%;
+
+}
+body {
+  font-family: 'Roboto', sans-serif;  width:100%;
+
+}
+.auth{
+  width:100%;
+}
+.auth__header {
+  padding: 15vh 1rem calc(11vh + 35px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0;
+  background-image: linear-gradient(#3280e4, #584dc3);
+  background-size: cover;
+  background-position: center center;
+  position: relative;
+  box-shadow: 0 7px 5px rgba(0, 0, 0, 0.3);
+}
+.auth__header:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+.auth__logo {
+  position: relative;
+  z-index: 18;
+  background: #fff;
+  padding: 10px;
+  border-radius: 50%;
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+.auth__body {
+  padding-bottom: 2rem;
+}
+.auth__form {
+  min-width: 280px;
+  max-width: 340px;
+  margin: auto;
+  margin-top: -70px;
+  padding: 0 10px;
+  position: relative;
+  z-index: 9;
+}
+.auth__form_body {
+  padding: 0.7rem 1.5rem 35px;
+  border-radius: 0.5rem;
+  background: #fff;
+  border: 1px solid #eee;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+.auth__form_title {
+  font-size: 1.3rem;
+  text-align: center;
+  color:#584dc3;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+.auth__form_actions {
+  text-align: center;
+  padding: 0 2rem;
+  margin-top: -25px;
+}
+.auth__form_actions .btn:hover {
+  border-radius: 30px;
+  box-shadow: 0 2px 12px rgba(50, 128, 228, 0.5);
+  background: #584dc3;
+  color: #fff;
+    transition-duration: .5s;
+}
+
+.auth__form_actions .btn{
+  border-radius: 30px;
+    background: white;
+    color:#584dc3;
+    transition-duration: .5s;
+    box-shadow: 0 2px 12px rgba(50, 128, 228, 0.5)
+}
+
+    </style>
+
+
+
+
+<!-- <link rel="stylesheet" href="../public/assests/index.css"> -->
+    </head>
+    <body>
+
+
+
+
+
+
+<div class="auth">
+    <%= message %>
+    <div class="auth__header">
+      <div class="auth__logo row " style="margin-top: -50px" >
+        <img height="90"  src="./assests/logocc.png" alt="">
+      </div>
+    </div>
+    <div class="auth__body">
+      <form class="auth__form" autocomplete="off" method="POST">
+        <div class="auth__form_body">
+          <h3 class="auth__form_title">Login</h3>
+          <div>
+            <div class="form-group">
+              <label class="text-uppercase small">Email</label>
+              <input type="email" name="email" class="form-control" placeholder="priyam@ridex.com">
+            </div>
+            <div class="form-group">
+              <label class="text-uppercase small">Password</label>
+              <input type="password" name="password" class="form-control" placeholder="Enter Your Password">
+            </div>
+          </div>
+        </div>
+        <div class="auth__form_actions">
+          <button class="btn btn-primary btn-lg btn-block">
+            LOGIN
+          </button>
+        </div>
+      </form>
+      <div class="container-fluid">
+      <hr/>
+      <h3 class="mt-5" style="color:#584dc3;text-align:center;">Not Registered?</h3>
+      <div class="row mt-3 justify-content-md-center justify-content-sm-center">
+        <div class="col"></div>
+        <div class="col mt-4" >
+          <div class="auth__form_actions">
+            <a href="/signupr" class="btn btn-primary btn-lg btn-block" style="width:100%;">
+                Signup as Rider
+            </a>
+            </div>
+        </div>
+        <div class="col mt-4 ">
+          <div class="auth__form_actions">
+            <a href="/signupd" class="btn btn-primary btn-lg btn-block" style="width:100%;">
+                Signup as Driver
+            </a>
+            </div>
+        </div>
+        <div class="col"></div>
+        </div>
+      </div>
+    </div>
+    <!-- <hr/>
+    <h3 class="mt-5" style="color:#584dc3;text-align:center;">Not Registered?</h3>
+    <div class="row mt-3 justify-content-sm-center">
+          <a  class="btn btn-outline-primary mr-5" href="signups" style="color:primary">Signup with spouse</a>
+          <a  class="btn btn-outline-primary" href="signupws" style="color:primary">Signup without spouse</a>
+      </div> -->
+  </div>
+
+ <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+</body>
+
+</html>

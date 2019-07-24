@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RideX | Signup as Rider</title>
+    
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+
+    <style>
+    @import url('https://fonts.googleapis.com/css?family=Roboto');
+html{
+  width:100%;
+  height:100%;
+
+}
+body {
+  font-family: 'Roboto', sans-serif;
+  width:100%;
+  height:100%;
+
+}
+.skewedbox{
+    background-image: linear-gradient(#3280e4, #584dc3);
+    transform:skew(0,-10deg)translateY(-270px);
+}
+.container-form{
+    transform:skew(0,10deg)translateY(370px);
+}
+.btn:hover{
+    color:#3280e4;
+    border-color:#3280e4;
+    box-shadow: 5px 10px #3280e4;
+    transition-duration: .5s;
+}
+.auth{
+  width:100%;
+}
+.auth__body {
+  width:100%;
+}
+.auth__form {
+  min-width: 50%;
+  max-width: 340px;
+  margin: auto;
+  padding: 0 10px;
+  position: relative;
+  z-index: 9;
+}
+.auth__form_body {
+  padding: 0.7rem 1.5rem 35px;
+  border-radius: 0.5rem;
+  background: #fff;
+  border: 1px solid #eee;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+.auth__form_title {
+  font-size: 1.3rem;
+  text-align: center;
+  color:#584dc3;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+.auth__form_actions {
+  text-align: center;
+  padding: 0 2rem;
+  margin-top: -25px;
+}
+.auth__form_actions .btn {
+  border-radius: 30px;
+  box-shadow: 0 2px 12px rgba(50, 128, 228, 0.5);
+    transition-duration: .5s;
+}
+
+.auth__form_actions .btn:hover{
+    background: white;
+    color:#584dc3;
+    transition-duration: .5s;
+    box-shadow: 0 2px 12px rgba(50, 128, 228, 0.5)
+}
+
+    </style>
+</head>
+
+<body>
+    <section class="skewedbox">
+    <div class="container container-form">
+        <div class="row mt-1 justify-content-md-center justify-content-sm-center">
+            <div class="col">
+                <a  class="btn btn-outline-light" href="./" style="color:primary">Already Registered</a>
+            </div>
+            <div class="col" style="text-align:right;">
+                <a  class="btn btn-outline-light" href="signups" style="color:primary">Signup as Driver</a>
+            </div>
+        </div>
+
+        <div class="auth">
+        
+            <div class="auth__body">
+            <form class="auth__form mt-5" autocomplete="off" method="POST">
+                <div class="auth__form_body">
+                <h3 class="auth__form_title">Signup as Rider</h3>
+                <p><%= message %></p>
+                <div>
+                   <h6 class="auth__form_subtitle">Your Details</h6>
+                   <hr/>
+                    <div class="form-group">
+                        <label class="text-uppercase small">Name</label>
+                        <input name="name" type="text" class="first_name form-control" placeholder="Priyam Shah" required="true">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-uppercase small">Phone Number</label>
+                        <input name="phno" type="text" class="first_name form-control" placeholder="7738XXXXXX" >
+                    </div>
+                    <div class="form-group">
+                        <label class="text-uppercase small">Email</label>
+                        <input name="email" type="email" class="last_name form-control" placeholder="priyam@ridex.com" required="true">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-uppercase small">Password</label>
+                        <input name="password" type="password" class="last_name form-control" required="true">
+                    </div>
+
+                </div>
+                </div>
+                <div class="auth__form_actions">
+                <button name="submit"class="btn btn-primary btn-lg btn-block">
+                    Sign Up
+                </button>
+                </div>
+            </form>
+            
+            </div>
+          </div>
+        </div>
+    </div>
+</section>
+
+
+ <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</body>
+</html>
