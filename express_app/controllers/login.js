@@ -21,13 +21,8 @@ module.exports=(app)=>{
         console.log(email,password);
         const docs = await Profiles.find({'email':email});
         console.log(docs,docs.length);
+
         if(docs.length == 1){
-            check = true;
-        }
-        else{
-            check = false;
-        }
-        if(check === true){
 
             req.session.email=docs[0]['email'];
             req.session.address=docs[0]['address'];

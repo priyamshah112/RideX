@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>RideX | Rider Dashboard</title>
+  <title>RideX | Rider Payment</title>
 
   <!-- Custom fonts for this template-->
   <link href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" rel="stylesheet" type="text/css">
@@ -63,7 +63,7 @@
 
     <!-- Sidebar -->
     <ul class="sidebar navbar-nav text-dark" style="background-image: linear-gradient(#3280e4, #584dc3); ">
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="/homer">
           <i class="fas fa-fw fa-tachometer-alt text-warning"></i>
           <span>Dashboard</span>
@@ -82,13 +82,13 @@
         <a class="nav-link" href="/rides">
           <i class="fas fa-fw fa-user-plus"></i>
           <span>Rides</span></a>
-      </li>
+      </li> 
 
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link" href="/pay">
           <i class="fas fa-fw fa-user-plus"></i>
           <span>Payment</span></a>
-      </li>  
+      </li> 
     </ul>
 
     <div id="content-wrapper" style="background:white;">
@@ -98,27 +98,43 @@
       <h2>Welcome To RideX! </h2>
     
       <hr>
-        <div>
-          <div class="auth__form_actions">
-                  <div class="form-group">
-                      <label class="text-uppercase small">From</label>
-                      <input name="from" type="text" class="first_name form-control" placeholder="Dheeraj Darshan,Jogeshwari East,Mumbai" required="true">
-                  </div>
-                  <div class="form-group">
-                      <label class="text-uppercase small">To</label>
-                      <input name="to" type="text" class="first_name form-control" placeholder="KJSCE,Vidyavihar,Mumbai" require="true">
-                  </div>
-                  <div class="form-group">
-                      <label class="text-uppercase small">Fare</label>
-                      <input name="fare" type="text" class="first_name form-control" placeholder="0.00 ETH" readonly="true">
-                  </div>
+        <div class="auth">
+        
+            <div class="auth__body">
+                <div class="row">
+                        <form class="auth__form mt-5" autocomplete="off" method="POST">
+                                <div class="auth__form_body">
+                                <h3 class="auth__form_title">Make Payment</h3>
 
-                 <button name="ride" class="btn btn-primary btn-lg btn-block">
-                        Ride
-                  </button>
+                                <div>
 
+                                   <hr/>
+                                    <div class="form-group">
+                                        <label class="text-uppercase small">From</label>
+                                        <input name="from" type="text" class="first_name form-control" placeholder="0x6142D7E5953683594e83c19e719D675bE9264a05" required="true">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="text-uppercase small">To</label>
+                                        <input name="to" type="text" class="first_name form-control" placeholder="0x951DAdD1B309164e2f6AF43961242c7966A9576D" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="text-uppercase small">Fare (ETH)</label>
+                                        <input name="fare" type="text" class="last_name form-control" placeholder="0.0 ETH" required="true">
+                                    </div>
+                                </div>
+
+                                
+                                <div class="auth__form_actions">
+                                <button name="submit" class="btn btn-primary btn-lg btn-block">
+                                    Pay
+                                </button>
+                                </div>
+                            </form>
+                            
+                </div>
+            </div>
           </div>
-      </div>
+        </div>
       <!-- /.container-fluid -->
 
       <!-- Sticky Footer -->

@@ -17,7 +17,7 @@ require("dotenv").config();
 module.exports=(app)=>{
 
     app.get("/signupd",(req,res)=>{
-        if(req.session.identity!== undefined){
+        if(req.session.email!== undefined){
             res.redirect("/homed");
         }
         else{

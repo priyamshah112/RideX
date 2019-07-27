@@ -12,7 +12,7 @@ const login=require("./controllers/login");
 const homer=require("./controllers/homer");
 const homed=require("./controllers/homed");
 const auction=require("./controllers/auction");
-
+const pay=require("./controllers/pay");
 
 mongoose.connect('mongodb://localhost:27017/RideX', {useNewUrlParser: true});
 
@@ -53,4 +53,4 @@ login(app);
 homer(app);
 homed(app);
 auction(app);
-
+pay(app);
