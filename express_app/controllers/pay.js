@@ -1,3 +1,4 @@
+const ethCrypto=require('eth-crypto');
 const HDwalletprovider=require("truffle-hdwallet-provider");
 const Web3=require("web3");
 const session=require("express-session");
@@ -27,21 +28,24 @@ module.exports=(app)=>{
 
         // Setting provider and web3
         const provider=new HDwalletprovider(
-           process.env.PRIVATE_KEY,
+           sender,
            process.env.ROPSTEN_INFURA
         );
         const web3=new Web3(provider);
         console.log("provider set");
 
         //Payment
-        console.log(web3.utils.toWei(fare,'wei'));
+        console.log(Web3.utils.toWei(fare,'wei'));
         var contract = new web3.eth.Contract(abi,address);
         console.log(contract,"I m contr");
-        var balance = await contract.methods.getEthBalance(sender);
-        console.log(balance);
+        var pub_key = ethCrypto.publicKeyByPrivateKey(sender);
+        var address = ethCrypto.publicKey.toAddress(pub_key);
+        console.log(address,pub_key,"my addr");
+        var balance = await contract.methods.getEthBalance(address);
+        console.log(balance,"my balance");
         var transfer = await contract.methods.fpay(receiver).send({
-            "from":sender,
-            "value": web3.utils.toWei(fare,'wei')
+            "from":address,
+            "value": Web3.utils.toWei(fare,'wei')
         });
         console.log(transfer,"I m transfered");
         console.log("payment done");
