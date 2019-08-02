@@ -1,21 +1,11 @@
 const abi2=[
 	{
 		"constant": false,
-		"inputs": [
-			{
-				"name": "_addr",
-				"type": "address"
-			}
-		],
-		"name": "getEthBalance",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
+		"inputs": [],
+		"name": "deposit",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
 		"type": "function"
 	},
 	{
@@ -24,17 +14,40 @@ const abi2=[
 			{
 				"name": "beneficiary",
 				"type": "address"
+			},
+			{
+				"name": "amount",
+				"type": "uint256"
 			}
 		],
-		"name": "fpay",
-		"outputs": [],
-		"payable": true,
-		"stateMutability": "payable",
+		"name": "withdraw",
+		"outputs": [
+			{
+				"name": "success",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getBalance",
+		"outputs": [
+			{
+				"name": "balance",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
 		"type": "function"
 	}
 ];
 
-const address2="0x6828f756254349455e8cc4f8cbe8015a6b6afe11"; //payment contract address ropsten
+const address2="0xe91c598e4a5d99d6fb54bc5eae5295846f25f443"; //payment contract address ropsten
 
 module.exports.abi2=abi2;
 module.exports.address2=address2;

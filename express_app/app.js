@@ -25,10 +25,9 @@ app.use(session({
     resave:false,
     saveUninitialized: false,
     store:new mongoStore({
-        url:'mongodb://localhost:27017/RideX',
+        url:'mongodb://hirechain:hirechain1@ds119085.mlab.com:19085/hirechain',
         autoRemove:false
     })
-
 }));
 app.use(express.static('./public'));
 app.use(bparser.urlencoded({extended:true}));

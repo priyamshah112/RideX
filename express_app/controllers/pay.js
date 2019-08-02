@@ -24,41 +24,43 @@ module.exports=(app)=>{
         var receiver=req.body.to;
         var fare=req.body.fare;
 
-        console.log(sender,receiver,fare);
+
 
         //Get balance
-        const web3 = new Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io/'));
-        var balance = web3.eth.getBalance(receiver); //Will give value in.
-        balance = web3.toDecimal(balance);  
-        console.log(balance," receiver my balance");      
+     //   const web3 = new Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io/v3/da4d3f3021fd4ada9c1e70a4b607e74f'));
+     //   var balance = web3.eth.getBalance(receiver); //Will give value in.
+     //   balance = web3.toDecimal(balance);  
+       // console.log(balance," receiver my balance");      
         // Setting provider and web3
         const provider=new HDwalletprovider(
            sender,
-            "https://ropsten.infura.io/"
+           'https://ropsten.infura.io/v3/da4d3f3021fd4ada9c1e70a4b607e74f'
         );
         web3=new Web3(provider);
         console.log("provider set");
 
         var pub_key = ethCrypto.publicKeyByPrivateKey(sender);
         var address = ethCrypto.publicKey.toAddress(pub_key);
-        console.log(address,pub_key,receiver,"my addr");
+        console.log(address,receiver,"my addr");
 
         //Payment
-        console.log(Web3.utils.toWei(fare,'wei'));
+
         var contract = new web3.eth.Contract(abi,address);
         console.log(contract,"I m contr");
 
 
         const pay1 = async () => {
             try{
-                //const web3 = new Web3(new Web3.providers.HttpProvider(testnet));
+                
 
-
-                var transfer = await contract.methods.fpay(receiver).send({
+                console.log(address,receiver,fare);
+                var deposit = await contract.methods.deposit().send({
                     "from":address,
-                    "value": Web3.utils.toWei(fare,'wei')
+                    "value": Web3.utils.toWei(fare,'ether'),
                 });
-                console.log(transfer,"I m transfered");
+                console.log(deposit,"transfered to contract");
+                var transfer = await contract.methods.withdraw(receiver,Web3.utils.toWei(fare,'ether')).call();
+                console.log(transfer,"transfered ");
                 console.log("payment done");
                 return "done";
             }
