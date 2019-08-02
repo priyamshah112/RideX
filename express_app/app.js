@@ -15,7 +15,7 @@ const auction=require("./controllers/auction");
 
 
 // mongoose.connect('mongodb://localhost:27017/RideX', {useNewUrlParser: true});
- 
+
 const app=express();
 
 app.set('view engine','ejs');
@@ -24,7 +24,10 @@ app.use(session({
     secret:"sometext",
     resave:false,
     saveUninitialized: false,
-   
+    // store:new mongoStore({
+    //     url:'mongodb://localhost:27017/RideX',
+    //     autoRemove:false
+    // })
 
 }));
 app.use(express.static('./public'));
