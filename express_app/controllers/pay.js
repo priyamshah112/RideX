@@ -1,12 +1,6 @@
 const ethCrypto=require('eth-crypto');
-const HDwalletprovider=require("truffle-hdwallet-provider");
 const Web3=require("web3");
-const session=require("express-session");
-var mongoose=require('mongoose');
-
-const abi=require("../payment_contract").abi2;
-const address=require("../payment_contract").address2;
-require("dotenv").config();
+const Tx = require('ethereumjs-tx').Transaction
 
 module.exports=(app)=>{
 
@@ -23,53 +17,53 @@ module.exports=(app)=>{
         var sender=req.body.from;
         var receiver=req.body.to;
         var fare=req.body.fare;
-
-
-
-        //Get balance
-     //   const web3 = new Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io/v3/da4d3f3021fd4ada9c1e70a4b607e74f'));
-     //   var balance = web3.eth.getBalance(receiver); //Will give value in.
-     //   balance = web3.toDecimal(balance);  
-       // console.log(balance," receiver my balance");      
-        // Setting provider and web3
-        const provider=new HDwalletprovider(
-           sender,
-           'https://ropsten.infura.io/v3/da4d3f3021fd4ada9c1e70a4b607e74f'
-        );
-        web3=new Web3(provider);
-        console.log("provider set");
-
         var pub_key = ethCrypto.publicKeyByPrivateKey(sender);
         var address = ethCrypto.publicKey.toAddress(pub_key);
         console.log(address,receiver,"my addr");
 
-        //Payment
+        const testnet = 'https://ropsten.infura.io/v3/da4d3f3021fd4ada9c1e70a4b607e74f';
 
-        var contract = new web3.eth.Contract(abi,address);
-        console.log(contract,"I m contr");
+        const web3 = new Web3( new Web3.providers.HttpProvider(testnet) );
 
+        web3.eth.defaultAccount = address;
+        console.log( web3.utils.toWei(fare,"ether"),web3.utils.toHex(web3.utils.toWei(fare,"ether")));
+        //signs trans
 
-        const pay1 = async () => {
-            try{
-                
+            const trans = await web3.eth.accounts.signTransaction({
+            nonce : web3.eth.getTransactionCount(web3.eth.defaultAccount),
+            to: receiver,
+            value: web3.utils.toWei(fare,"ether"),
+            gas: 2000000
+            }, sender);        
 
-                console.log(address,receiver,fare);
-                var deposit = await contract.methods.deposit().send({
-                    "from":address,
-                    "value": Web3.utils.toWei(fare,'ether'),
-                });
-                console.log(deposit,"transfered to contract");
-                var transfer = await contract.methods.withdraw(receiver,Web3.utils.toWei(fare,'ether')).call();
-                console.log(transfer,"transfered ");
-                console.log("payment done");
-                return "done";
-            }
-            catch(err){
-                    console.log(err);
-                    return "failed";
-            }
-        }
-        console.log(pay1());
+            const rawTrans=trans['rawTransaction'];
+            console.log(trans['rawTransaction']);
+        //send sign transc
+
+         var privateKey = new Buffer.from(sender, 'hex');
+
+        // var nonce = web3.eth.getTransactionCount(web3.eth.defaultAccount);
+        // var rawTx = {
+        //   nonce: nonce,
+        //   gasPrice: 21000,
+        //   gasLimit: '0x2710',
+        //   to: receiver,
+        //   value:  web3.utils.toHex(web3.utils.toWei(fare,"ether")),
+        //   //data: '0x7f7465737432000000000000000000000000000000000000000000000000000000600057'
+        // }
+
+        //with raw Transaction
+        var tx = new Tx(rawTrans,{ chain:'ropsten',hardfork: 'petersburg'});
+        tx.sign(privateKey);
+        
+        var serializedTx = tx.serialize();
+        
+        console.log(serializedTx.toString('hex'),"serialized");
+        // 0xf889808609184e72a00082271094000000000000000000000000000000000000000080a47f74657374320000000000000000000000000000000000000000000000000000006000571ca08a8bbf888cfa37bbf0bb965423625641fc956967b81d12e23709cead01446075a01ce999b56a8a88504be365442ea61239198e23d1fce7d00fcfc5cd3b44b7215f
+        
+        var payment= await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex')).on('receipt', console.log);
+        console.log(payment,"payment");
+        
 
 });
 
