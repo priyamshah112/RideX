@@ -26,29 +26,48 @@ module.exports=(app)=>{
 
         console.log(sender,receiver,fare);
 
+        //Get balance
+        const web3 = new Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io/'));
+        var balance = web3.eth.getBalance(receiver); //Will give value in.
+        balance = web3.toDecimal(balance);  
+        console.log(balance," receiver my balance");      
         // Setting provider and web3
         const provider=new HDwalletprovider(
            sender,
-           process.env.ROPSTEN_INFURA
+            "https://ropsten.infura.io/"
         );
-        const web3=new Web3(provider);
+        web3=new Web3(provider);
         console.log("provider set");
+
+        var pub_key = ethCrypto.publicKeyByPrivateKey(sender);
+        var address = ethCrypto.publicKey.toAddress(pub_key);
+        console.log(address,pub_key,receiver,"my addr");
 
         //Payment
         console.log(Web3.utils.toWei(fare,'wei'));
         var contract = new web3.eth.Contract(abi,address);
         console.log(contract,"I m contr");
-        var pub_key = ethCrypto.publicKeyByPrivateKey(sender);
-        var address = ethCrypto.publicKey.toAddress(pub_key);
-        console.log(address,pub_key,"my addr");
-        var balance = await contract.methods.getEthBalance(address);
-        console.log(balance,"my balance");
-        var transfer = await contract.methods.fpay(receiver).send({
-            "from":address,
-            "value": Web3.utils.toWei(fare,'wei')
-        });
-        console.log(transfer,"I m transfered");
-        console.log("payment done");
+
+
+        const pay1 = async () => {
+            try{
+                //const web3 = new Web3(new Web3.providers.HttpProvider(testnet));
+
+
+                var transfer = await contract.methods.fpay(receiver).send({
+                    "from":address,
+                    "value": Web3.utils.toWei(fare,'wei')
+                });
+                console.log(transfer,"I m transfered");
+                console.log("payment done");
+                return "done";
+            }
+            catch(err){
+                    console.log(err);
+                    return "failed";
+            }
+        }
+        console.log(pay1());
 
 });
 
