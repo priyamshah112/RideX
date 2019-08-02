@@ -81,15 +81,9 @@
       <hr>
         <div>
           <div class="auth__form_actions">
-            <% for(var i=0;i<rides.length;i++){%>
-              <p><%=rides[i].from%> to <%=rides[i].to%></p>
-              <form method="POST"> 
-                <label>Add bid</label>
-                <input name="value" type="text"/>
-                &nbsp;<input name="username"  type="hidden"  value="<%= rides[i].username%>">
-                <button type="submit"> Submit</button>
-              </form>
-            <% }%>
+           <p><%=from %> to <%=to%></p>
+           <p>Status:<%=status%></p>
+         
 
           </div>
       </div>

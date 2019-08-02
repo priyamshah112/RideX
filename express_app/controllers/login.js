@@ -33,6 +33,7 @@ module.exports=(app)=>{
         const response= await contract.methods.get(username).call();
         
         if(response['5']!==""){
+            console.log(response);
             if(password===response['6']){
                 req.session.username=username;
                 req.session.privateKey=response['0'];
@@ -45,6 +46,7 @@ module.exports=(app)=>{
                     res.redirect("/homer");
                 }
             }else{
+
                 res.render("index",{message:"invalid credentials"});
             }
             

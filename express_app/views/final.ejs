@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>RideX | Driver Dashboard</title>
+  <title>RideX | Rider Dashboard</title>
 
   <!-- Custom fonts for this template-->
   <link href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" rel="stylesheet" type="text/css">
@@ -64,12 +64,25 @@
     <!-- Sidebar -->
     <ul class="sidebar navbar-nav text-dark" style="background-image: linear-gradient(#3280e4, #584dc3); ">
       <li class="nav-item active">
-        <a class="nav-link" href="/homed">
+        <a class="nav-link" href="/homer">
           <i class="fas fa-fw fa-tachometer-alt text-warning"></i>
           <span>Dashboard</span>
         </a>
       </li>
 
+
+      <li class="nav-item">
+        <a class="nav-link" href="/auction">
+          <i class="fas fa-fw fa-user"></i>
+          <span>Auction</span></a>
+      </li>
+      
+
+      <li class="nav-item">
+        <a class="nav-link" href="/rides">
+          <i class="fas fa-fw fa-user-plus"></i>
+          <span>Rides</span></a>
+      </li> 
     </ul>
 
     <div id="content-wrapper" style="background:white;">
@@ -79,19 +92,21 @@
       <h2>Welcome To RideX! </h2>
     
       <hr>
-        <div>
-          <div class="auth__form_actions">
-            <% for(var i=0;i<rides.length;i++){%>
-              <p><%=rides[i].from%> to <%=rides[i].to%></p>
-              <form method="POST"> 
-                <label>Add bid</label>
-                <input name="value" type="text"/>
-                &nbsp;<input name="username"  type="hidden"  value="<%= rides[i].username%>">
-                <button type="submit"> Submit</button>
-              </form>
-            <% }%>
-
-          </div>
+      <div>
+         <ul>
+            <li><%=final.name%></li>
+            <li><%=final.phoneNumber%></li>
+            <li><%=final.value%></li>
+            <li><%=final.vehicle%></li>
+            <li><%=final.vehicleNo%></li>
+         </ul>
+         <% if(message==null){%>
+         <form method="POST">
+            <button>
+               Met
+            </button>
+         </form>
+         <%}%>
       </div>
       <!-- /.container-fluid -->
 
