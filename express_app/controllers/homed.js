@@ -9,7 +9,11 @@ module.exports=(app)=>{
     app.get("/homed",(req,res)=>{
         
         if(req.session.username!==undefined){
-            res.render("homed");
+            if(req.session.usertype==="Driver"){
+                res.render("/homed");
+            }else{
+                res.render("/homer");
+            }
         }else{
             res.redirect("/");
         }

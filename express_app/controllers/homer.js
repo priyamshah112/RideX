@@ -8,8 +8,13 @@ const session=require("express-session");
 module.exports=(app)=>{
     app.get("/homer",(req,res)=>{
         
-        if(req.session.email!==undefined){
-            res.render("homer");
+        if(req.session.username!==undefined){
+            if(req.session.userType==="Rider")
+            {
+                res.render("homer");}
+            else{
+                res.render("homed");
+            }
         }else{
             res.redirect("/");
         }
