@@ -74,17 +74,19 @@ const abi2=[
 			{
 				"name": "",
 				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "string"
 			}
 		],
 		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
-   }
-   
+	}
 ];
 
-
-const address2="0x7984f547666f9c3b5f7f93a2b19004c8538955a0"; //user contract address
+const address2="0x84eac39449172d948343f81297b08f998fa01660"; //user contract address
 
 module.exports.abi2=abi2;
 module.exports.address2=address2;

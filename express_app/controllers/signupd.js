@@ -6,9 +6,10 @@ const session=require("express-session");
 var mongoose=require('mongoose');
 // const cookie=require("cookie-parser");
 
-//const abi=require("../family_tree_details").abi;
-//const address=require("../family_tree_details").address;
-//const byteCode=require("../family_tree_details").bytecode;
+const abi=require("../user_contract").abi2;
+const address=require("../user_contract").address2;
+
+
 const createIdentity=require("./create_identity");
 const Profiles = require('../models/Profiles');
 
@@ -28,34 +29,58 @@ module.exports=(app)=>{
     app.post("/signupd",async (req,res)=>{
         var name=req.body.name;
         var phno=req.body.phno;
-        var email=req.body.email;
+        var username=req.body.email;
         var password=req.body.password;
         var vehicle=req.body.vehicle;
-        var vehicle_num=req.body.vehicle_num;
-        var user_type = 'Driver';
+        var vehicleNo=req.body.vehicle_num;
+        var userType = 'Driver';
 
         // Creating identity
         var identity=createIdentity();
 
         console.log(identity);
-        var newPublicKey=identity.publicKey;
-        var newCompressed=ethCrypto.publicKey.compress(
-            newPublicKey
+        const publicKey=identity.publicKey;
+        const privateKey=identity.privateKey;
+
+        const newCompressed=ethCrypto.publicKey.compress(
+            publicKey
         );
         identity.compressed=newCompressed;
         
+        
+
         // Setting provider and web3
-        //const provider=new HDwalletprovider(
-        //    process.env.PRIVATE_KEY,
-        //    process.env.ROPSTEN_INFURA
-        //);
-        //const web3=new Web3(provider);
-        //console.log("provider set");
-        // Deploying smart contract
-        //var contract=await new web3.eth.Contract(abi).deploy({data:byteCode,arguments:[newCompressed,first_name,last_name,dob,gender,marraigeStatus]}).send({
-        //   from:"0x2248d96D13198CC52274f30F029C241c87b5a23c",
-        //    gas:'4700000'
-        //});
+        const provider=new HDwalletprovider(
+           "6971A7AEFA1B6643311ADD7214B58CAC41E257FB17F47CD4D5C529902FAD00A7",
+           'https://ropsten.infura.io/v3/da4d3f3021fd4ada9c1e70a4b607e74f'
+        );
+
+        const web=new Web3(provider);
+
+        console.log("provider set");
+
+        const contract=new web.eth.Contract(abi,address);
+        const response= await contract.methods.set(name,username,phno,vehicle,vehicleNo,userType,password,privateKey).send({
+            from:"0x2248d96D13198CC52274f30F029C241c87b5a23c"   
+        });
+
+
+
+
+
+        // --------------------------------------------------------------------------------------------------
+
+        req.session.username=username;
+        req.session.privateKey=privateKey;
+        req.session.userTyep=userType;
+        const provider2=new HDwalletprovider(
+            req.session.privateKey,
+            'https://ropsten.infura.io/v3/da4d3f3021fd4ada9c1e70a4b607e74f'
+        );
+        const web3= new Web3(provider2);
+        console.log(await web3.eth.accounts[0]);
+        
+        res.redirect("/homed");
         //console.log("deployed --contract deployment left");
 /*      Code to download keys    
         // Setting up sessions
@@ -88,12 +113,5 @@ module.exports=(app)=>{
 */
 });
 
-    app.get("/logout",(req,res)=>{
-        req.session.destroy((err)=>{
-            if(err){
-                console.log(err);
-            }        
-        });
-        res.redirect("/");
-    });
+
 }
