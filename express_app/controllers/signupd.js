@@ -33,7 +33,6 @@ module.exports=(app)=>{
         var vehicle=req.body.vehicle;
         var vehicle_num=req.body.vehicle_num;
         var user_type = 'Driver';
-        console.log(name,phno,email,password,vehicle,vehicle_num,user_type);
 
         // Creating identity
         var identity=createIdentity();
@@ -44,19 +43,7 @@ module.exports=(app)=>{
             newPublicKey
         );
         identity.compressed=newCompressed;
-        //storing to mongo
-        var newUser = new Profiles({'name':name,'phno':phno,'user_type':'Driver','email':email,'password':password,'lat':'19.137051','long':'72.855537','address':identity.address,'vehicle':vehicle,'vehicle_no':vehicle_num,'cpubkey':identity.compressed});
-        newUser.save(function (err) {
-          if (err) {
-            console.log(err);
-          } else {
-            console.log('Driver saved to db');
-            req.session.email=email;
-            req.session.address=identity.address;
-            req.session.user_type='Driver';
-            res.redirect('/homed');
-          }
-        });
+        
         // Setting provider and web3
         //const provider=new HDwalletprovider(
         //    process.env.PRIVATE_KEY,

@@ -44,18 +44,18 @@ module.exports=(app)=>{
         );
         identity.compressed=newCompressed;
         //storing to mongo
-        var newUser = new Profiles({'name':name,'phno':phno,'user_type':'Rider','email':email,'password':password,'lat':'19.137051','long':'72.855537','address':identity.address,'cpubkey':identity.compressed});
-        newUser.save(function (err) {
-          if (err) {
-            console.log(err);
-          } else {
-            console.log('Rider saved to db');
-            req.session.email=email;
-            req.session.address=identity.address;
-            req.session.user_type='Rider';
-            res.redirect('/homer');
-          }
-        });
+        // var newUser = new Profiles({'name':name,'phno':phno,'user_type':'Rider','email':email,'password':password,'lat':'19.137051','long':'72.855537','address':identity.address,'cpubkey':identity.compressed});
+        // newUser.save(function (err) {
+        //   if (err) {
+        //     console.log(err);
+        //   } else {
+        //     console.log('Rider saved to db');
+        //     req.session.email=email;
+        //     req.session.address=identity.address;
+        //     req.session.user_type='Rider';
+        //     res.redirect('/homer');
+        //   }
+        // });
         // Setting provider and web3
         //const provider=new HDwalletprovider(
         //    process.env.PRIVATE_KEY,
