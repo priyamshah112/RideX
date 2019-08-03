@@ -65,7 +65,7 @@ module.exports=(app)=>{
             console.log(dbRecord);
             
             if(dbRecord.status==="BOK" || dbRecord.status==="MET"){
-                res.redirect("/final");
+                res.redirect("/finalr");
             }else{
             let message=null;
             const bids=dbRecord.bids;
@@ -91,7 +91,7 @@ module.exports=(app)=>{
         }
     });
 
-    app.get("/final",async(req,res)=>{
+    app.get("/finalr",async(req,res)=>{
         const getBidder=await CurrentRide.find({username:req.session.username});
         const stat = getBidder.status;
         const provider=new HDwalletprovider(
@@ -103,6 +103,7 @@ module.exports=(app)=>{
         console.log("provider set here");
     
         const contract=new web3.eth.Contract(abi,address);
+<<<<<<< HEAD
         // console.log(;
         if(stat=='BOK'){
             const response=await contract.methods.get(getBidder[0].finalBidder).call();
@@ -132,9 +133,28 @@ module.exports=(app)=>{
             console.log(final);
             res.render("final",{final:final});
         }
+=======
+        console.log(getBidder[0]);
+        const response=await contract.methods.get(getBidder[0].finalBidder).call();
+        
+        const final={
+            name:response['5'],
+            phoneNumber:response['1'],
+            value:getBidder[0].finalValue,
+            vehicle:response['2'],
+            vehicleNo:response['3']
+
+        }
+        const status=getBidder[0].status;
+        if(status==="MET"){
+            res.render("finalr",{final:final,message:"done"});    
+        }else{
+        res.render("finalr",{final:final,message:null});
+        }
+>>>>>>> e05b1d3889263fc275f6e39c3d1e5de166c17a1a
 
     });
-    app.post("/final",async(req,res)=>{
+    app.post("/finalr",async(req,res)=>{
         const currentUser= await CurrentRide.findOneAndUpdate({username:req.session.username},{status:"MET"});
         const getBidder=await CurrentRide.find({username:req.session.username});
         const provider=new HDwalletprovider(
@@ -158,8 +178,13 @@ module.exports=(app)=>{
             status:response['4']
         }
 
+<<<<<<< HEAD
         console.log(final);
         res.render("final",{final:final})
+=======
+
+        res.render("finalr",{final:final,message:"done"})
+>>>>>>> e05b1d3889263fc275f6e39c3d1e5de166c17a1a
 
     });
  
