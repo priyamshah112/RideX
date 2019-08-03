@@ -73,17 +73,6 @@ module.exports=(app)=>{
         req.session.username=username;
         req.session.privateKey=privateKey;
         req.session.userType=userType;
-<<<<<<< HEAD
-        const provider2=new HDwalletprovider(
-            req.session.privateKey,
-            'https://ropsten.infura.io/v3/da4d3f3021fd4ada9c1e70a4b607e74f'
-        );
-        const web3= new Web3(provider2);
-        console.log(await web3.eth.accounts[0]);
-        
-=======
-
->>>>>>> f822b5808bee90f46a769ee9f0fe438dfdd932d0
         res.redirect("/homed");
         //console.log("deployed --contract deployment left");
 /*      Code to download keys    
