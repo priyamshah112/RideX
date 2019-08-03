@@ -17,27 +17,6 @@ module.exports=(app)=>{
     
 
     app.post("/",async (req,res)=>{
-<<<<<<< HEAD
-        var email=req.body.email;
-        var password=req.body.password;
-        console.log(email,password);
-        const docs = await Profiles.find({'email':email});
-        console.log(docs,docs.length);
-
-        if(docs.length == 1){
-
-            req.session.email=docs[0]['email'];
-            req.session.address=docs[0]['address'];
-            req.session.user_type=docs[0]['user_type'];
-            user_type = docs[0]['user_type'];
-            console.log(req.session.email,req.session.address,req.session.user_type);
-            console.log("successful");
-            if (user_type == 'Rider'){
-                res.redirect("/homer");
-            }
-            if (user_type == 'Driver'){
-                res.redirect("/homed");
-=======
 
         const username=req.body.email;
         const password=req.body.password;
@@ -69,7 +48,6 @@ module.exports=(app)=>{
             }else{
 
                 res.render("index",{message:"invalid credentials"});
->>>>>>> 2fece29f66f035ec1dff775c8d81c31dbdbf0500
             }
             
         }else{

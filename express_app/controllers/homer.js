@@ -93,28 +93,45 @@ module.exports=(app)=>{
 
     app.get("/final",async(req,res)=>{
         const getBidder=await CurrentRide.find({username:req.session.username});
+        const stat = getBidder.status;
         const provider=new HDwalletprovider(
             "6971A7AEFA1B6643311ADD7214B58CAC41E257FB17F47CD4D5C529902FAD00A7",
             'https://ropsten.infura.io/v3/da4d3f3021fd4ada9c1e70a4b607e74f'
          );
         const web3=new Web3(provider);
     
-        console.log("provider set");
+        console.log("provider set here");
     
         const contract=new web3.eth.Contract(abi,address);
         // console.log(;
-        const response=await contract.methods.get(getBidder[0].finalBidder).call();
-        
-        const final={
-            name:response['5'],
-            phoneNumber:response['1'],
-            value:getBidder[0].finalValue,
-            vehicle:response['2'],
-            vehicleNo:response['3']
-
+        if(stat=='BOK'){
+            const response=await contract.methods.get(getBidder[0].finalBidder).call();
+            
+            const final={
+                name:response['5'],
+                phoneNumber:response['1'],
+                value:getBidder[0].finalValue,
+                vehicle:response['2'],
+                vehicleNo:response['3'],
+                status:response['4']
+            }
+            console.log(final);
+            res.render("final",{final:final});
         }
-        res.render("final",{final:final,message:null});
-
+        else if(stat=='MET'){
+            const response=await contract.methods.get(getBidder[0].finalBidder).call();
+            
+            const final={
+                name:response['5'],
+                phoneNumber:response['1'],
+                value:getBidder[0].finalValue,
+                vehicle:response['2'],
+                vehicleNo:response['3'],
+                status:response['4']
+            }
+            console.log(final);
+            res.render("final",{final:final});
+        }
 
     });
     app.post("/final",async(req,res)=>{
@@ -137,12 +154,12 @@ module.exports=(app)=>{
             phoneNumber:response['1'],
             value:getBidder[0].finalValue,
             vehicle:response['2'],
-            vehicleNo:response['3']
-
+            vehicleNo:response['3'],
+            status:response['4']
         }
 
-
-        res.render("final",{final:final,message:"done"})
+        console.log(final);
+        res.render("final",{final:final})
 
     });
  

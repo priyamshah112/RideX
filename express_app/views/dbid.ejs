@@ -82,7 +82,17 @@
         <div>
           <div class="auth__form_actions">
            <p><%=from %> to <%=to%></p>
-           <p>Status:<%=status%></p>
+           <% if(status=='met'){%>
+            <form method="POST">
+               <button>
+                  Finish Ride
+               </button>
+            </form>
+            <%}%>
+            <% if(status=='pending'){%>
+              <p>Status:<%=status%></p>
+              <%}%>            
+
          
 
           </div>

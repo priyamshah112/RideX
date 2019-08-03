@@ -20,11 +20,18 @@ module.exports=(app)=>{
                 if(findExisting.length===0){
                 const allRecords=await CurrentRide.find({});
                     res.render("homed",{rides:allRecords});
-                }else{
-                    const currentBid=findExisting[0];
-                    res.render("dbid",{from:currentBid.from,to:currentBid.to,status:"pending"});
                 }
-
+                else{
+                    //avl means driver has bidded for that ride
+                    const book_avl=await CurrentRide.find( { $and: [ {'bids.bidder':req.session.username } , { $or: [ {'status':"BOK"} , {'status':"AVL"} ] }  ] });
+                    console.log(book_avl,"avl or booked");
+                    if(book_avl.length==1){
+                        res.render("dbid",{from:book_avl[0].from,to:book_avl[0].to,status:"pending"});
+                    }
+                    else{
+                        res.render("dbid",{from:book_avl[0].from,to:book_avl[0].to,status:"met"});
+                    }                    
+                }
                 
             }else{
                 res.render("homer",{});
@@ -53,10 +60,18 @@ module.exports=(app)=>{
             value:value,
             bidder:req.session.username,
             vehicle:response['2'],
-            vehicaleNo:response['3']
+            vehicaleNo:response['3'],
+
         }
-        const insertValue=await CurrentRide.findOneAndUpdate({username:customerUsername},{$push:{bids:bid}});
-        console.log(insertValue);
+        if(response['4']=="met"){
+            const insertValue=await CurrentRide.findOneAndDelete({username:customerUsername},{status:'MET'});
+            console.log(insertValue);
+            res.redirect("homed");
+        }
+        else{
+            const insertValue=await CurrentRide.findOneAndUpdate({username:customerUsername},{$push:{bids:bid},$set:{status:'AVL'}});
+            console.log(insertValue);
+        }
 
     });  
 

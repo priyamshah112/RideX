@@ -99,8 +99,9 @@
             <li><%=final.value%></li>
             <li><%=final.vehicle%></li>
             <li><%=final.vehicleNo%></li>
+            <li><%=final.status%></li>
          </ul>
-         <% if(message==null){%>
+         <% if(final.status=='BOK'){%>
          <form method="POST">
             <button>
                Met
