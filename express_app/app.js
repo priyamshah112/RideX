@@ -40,23 +40,26 @@ app.use(bparser.json());
 
 app.get("/",async (req,res)=>{
         
-    if(req.session.username!==undefined)
-    {
-        console.log(req.session.userType);
-        if(req.session.userType==="Driver"){
-            res.redirect("/homed");
-        }else{
-            res.redirect("/homer");
-        }
+    // if(req.session.username!==undefined)
+    // {
+    //     console.log(req.session.userType);
+    //     if(req.session.userType==="Driver"){
+    //         res.redirect("/homed");
+    //     }else{
+    //         res.redirect("/homer");
+    //     }
 
-    }
-    else{
-        res.render("index",{message:null});
-    }
+    // }
+    // else{
+    //     res.render("index",{message:null});
+    // }
+    res.render("index",{message:null});
 
 });
 
-
+app.get("/signup",async(req,res)=>{
+    res.render("/sign");
+});
 
 
 app.listen(3000,()=>{
