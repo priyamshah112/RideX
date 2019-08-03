@@ -95,6 +95,9 @@ module.exports=(app)=>{
         }
 
     });
+    app.post("/finald",async(req,res)=>{
+        
+    });
 
  
 }
