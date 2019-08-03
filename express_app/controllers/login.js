@@ -28,7 +28,7 @@ app.get("/login",async (req,res)=>{
 
     }
     else{
-        res.render("index",{message:null});
+        res.render("login",{message:null});
     }
 
 });
