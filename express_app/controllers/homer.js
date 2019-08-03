@@ -92,6 +92,7 @@ module.exports=(app)=>{
     });
 
     app.get("/finalr",async(req,res)=>{
+        if(req.session.username!==undefined){
         const getBidder=await CurrentRide.find({username:req.session.username});
         const provider=new HDwalletprovider(
             "6971A7AEFA1B6643311ADD7214B58CAC41E257FB17F47CD4D5C529902FAD00A7",
@@ -118,6 +119,8 @@ module.exports=(app)=>{
             res.render("finalr",{final:final,message:"done"});    
         }else{
         res.render("finalr",{final:final,message:null});
+        }}else{
+            res.redirect("/");
         }
 
     });

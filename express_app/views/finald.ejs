@@ -90,6 +90,8 @@
 
           <%if(message==null){%>
             <form method="POST">
+                <input value="<%= result.username %>" type="text" name="username" hidden>
+                <input value="<%= result.value %>" type="text" name="value" hidden>
               <button>Done</button>
             </form>
           <%}%>
