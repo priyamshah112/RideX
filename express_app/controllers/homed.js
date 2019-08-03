@@ -176,7 +176,7 @@ module.exports=(app)=>{
             var payment= await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex')).on('receipt', console.log);
             const deleteAuction = await CurrentRide.findOneAndDelete({username:req.body.username});
             console.log(deleteAuction);
-            res.redirect("/homed");
+            res.render("payed",{fare:fare,from:deleteAuction.from,to:deleteAuction.to});
         }
         catch(err){
             console.log(err);

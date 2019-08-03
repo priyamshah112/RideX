@@ -6,13 +6,19 @@
 <title>14 Android</title>
 <style id="applicationStylesheet" type="text/css">
 	button{
-	background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
+		background-color: purple; /* Green */
+		border: none;
+		color: white;
+		padding: 15px 32px !important;
+		border-radius:5px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		margin: 4px 2px;
+		cursor: pointer;
+		-webkit-transition-duration: 0.4s; /* Safari */
+		transition-duration: 0.4s;
 	}
 	input{
 		height:30px;
@@ -1839,7 +1845,7 @@ window.application = application;
 		<span>Ride fare</span>
 	</div>
 	<div id="Rs__189">
-		<span>ETH. <%=final.value%></span>
+		<span> <%=final.value%> ETH</span>
 	</div>
 	<div id="ID4_mins">
 		<span>4 mins</span>
@@ -1851,33 +1857,29 @@ window.application = application;
 		<span><%=final.vehicle%> <%=final.vehicleNo%></span>
 	</div>
 	<div id="Group_64">
-		<svg class="Rectangle_6">
-			<rect id="Rectangle_6" rx="20" ry="20" x="0" y="0" width="170" height="40">
-			</rect>
-		</svg>
+
 		<div id="Call_now">
 			<span><%=final.phoneNumber%></span>
 		</div>
 	</div>
 
 	<div id="Hit_Bingo_when_you_meet_your_d">
-		<span>Hit </span><span style="font-style:normal;font-weight:bold;">
+		<span style="font-style:normal;font-weight:bold;">
 		         <% if(message==null){%>
          <form method="POST">
-            <button>		
-		Bingo
-            </button>
+            	
+
+                  <button>
+               Bingo
+              </button>
+
+            
          </form>
-         <%}%></span><span> when you meet your driver!</span>
+         <%}%></span>
 	</div>
 	<div id="Group_69">
-		<svg class="Rectangle_6_A22_Rectangle_6">
-			<rect id="Rectangle_6_A22_Rectangle_6" rx="20" ry="20" x="0" y="0" width="170" height="40">
-			</rect>
-		</svg>
-		<div id="Bingo">
-			<span>Bingo</span>
-		</div>
+
+
 	</div>
 </div>
 </body>
