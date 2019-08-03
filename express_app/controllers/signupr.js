@@ -66,13 +66,8 @@ module.exports=(app)=>{
 
         req.session.username=username;
         req.session.privateKey=privateKey;
-        req.session.userTyep=userType;
-        const provider2=new HDwalletprovider(
-            req.session.privateKey,
-            'https://ropsten.infura.io/v3/da4d3f3021fd4ada9c1e70a4b607e74f'
-        );
-        const web3= new Web3(provider2);
-        console.log(await web3.eth.accounts[0]);
+        req.session.userType=userType;
+        
         res.redirect("/homer");
         
 });

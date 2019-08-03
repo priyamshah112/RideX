@@ -22,7 +22,7 @@ module.exports=(app)=>{
             res.redirect("/homed");
         }
         else{
-        res.render("signupd",{message:null});
+            res.render("signupd",{message:null});
         }
     });
 
@@ -72,7 +72,7 @@ module.exports=(app)=>{
 
         req.session.username=username;
         req.session.privateKey=privateKey;
-        req.session.userTyep=userType;
+        req.session.userType=userType;
         const provider2=new HDwalletprovider(
             req.session.privateKey,
             'https://ropsten.infura.io/v3/da4d3f3021fd4ada9c1e70a4b607e74f'
