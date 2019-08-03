@@ -1,12 +1,17 @@
 const ethCrypto=require('eth-crypto');
 const Web3=require("web3");
 const Tx = require('ethereumjs-tx').Transaction
+const session=require("express-session");
+const CurrentRide=require("../models/Auction");
+const abi=require("../user_contract").abi2;
+const address=require("../user_contract").address2;
 
 module.exports=(app)=>{
 
     app.get("/pay",(req,res)=>{
-        if(req.session.email!== undefined){
+        if(req.session.privateKey!== undefined){
             res.render("pay");
+            console.log(req.session.privateKey);
         }
         else{
         res.render("signupr",{message:"error in pay"});

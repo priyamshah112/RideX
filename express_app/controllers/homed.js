@@ -6,7 +6,7 @@ const session=require("express-session");
 const CurrentRide=require("../models/Auction");
 const abi=require("../user_contract").abi2;
 const address=require("../user_contract").address2;
-
+const Tx = require('ethereumjs-tx').Transaction;
 
 
 module.exports=(app)=>{
@@ -102,7 +102,8 @@ module.exports=(app)=>{
             phoneNumber:response['1'],
             to:checkFinal[0].to,
             from:checkFinal[0].from,
-            value:checkFinal[0].finalValue
+            value:checkFinal[0].finalValue,
+            username:checkFinal[0].us
         }
 
         if(checkFinal[0].status==="MET"){
@@ -114,7 +115,68 @@ module.exports=(app)=>{
 
     });
     app.post("/finald",async(req,res)=>{
+
+        const provider=new HDwalletprovider(
+            "6971A7AEFA1B6643311ADD7214B58CAC41E257FB17F47CD4D5C529902FAD00A7",
+            'https://ropsten.infura.io/v3/da4d3f3021fd4ada9c1e70a4b607e74f'
+         );
+        const web3=new Web3(provider);            
+        const contract=new web3.eth.Contract(abi,address);
+    
+        const response=await contract.methods.get(req.body.username).call();
+        console.log(response);
+
+        var sender=response[0];
+        var receiver=req.session.privateKey;
+        var fare=req.body.value;
         
+        var pub_key1 = ethCrypto.publicKeyByPrivateKey(receiver);
+        var address1 = ethCrypto.publicKey.toAddress(pub_key1);
+
+        console.log(address,address1,"my addr");
+
+        const testnet = 'https://ropsten.infura.io/v3/da4d3f3021fd4ada9c1e70a4b607e74f';
+
+        const web3 = new Web3( new Web3.providers.HttpProvider(testnet) );
+
+        web3.eth.defaultAccount = address;
+        console.log( web3.utils.toWei(fare,"ether"),web3.utils.toHex(web3.utils.toWei(fare,"ether")));
+        //signs trans
+
+            const trans = await web3.eth.accounts.signTransaction({
+            nonce : web3.eth.getTransactionCount(web3.eth.defaultAccount),
+            to: address1,
+            value: web3.utils.toWei(fare,"ether"),
+            gas: 2000000
+            }, sender);        
+
+            const rawTrans=trans['rawTransaction'];
+            console.log(trans['rawTransaction']);
+        //send sign transc
+
+         var privateKey = new Buffer.from(sender, 'hex');
+
+        // var nonce = web3.eth.getTransactionCount(web3.eth.defaultAccount);
+        // var rawTx = {
+        //   nonce: nonce,
+        //   gasPrice: 21000,
+        //   gasLimit: '0x2710',
+        //   to: receiver,
+        //   value:  web3.utils.toHex(web3.utils.toWei(fare,"ether")),
+        //   //data: '0x7f7465737432000000000000000000000000000000000000000000000000000000600057'
+        // }
+
+        //with raw Transaction
+        var tx = new Tx(rawTrans,{ chain:'ropsten',hardfork: 'petersburg'});
+        tx.sign(privateKey);
+        
+        var serializedTx = tx.serialize();
+        
+        console.log(serializedTx.toString('hex'),"serialized");
+        // 0xf889808609184e72a00082271094000000000000000000000000000000000000000080a47f74657374320000000000000000000000000000000000000000000000000000006000571ca08a8bbf888cfa37bbf0bb965423625641fc956967b81d12e23709cead01446075a01ce999b56a8a88504be365442ea61239198e23d1fce7d00fcfc5cd3b44b7215f
+        
+        var payment= await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex')).on('receipt', console.log);
+        console.log(payment,"payment");
     });
 
  
