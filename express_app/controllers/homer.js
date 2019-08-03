@@ -65,7 +65,7 @@ module.exports=(app)=>{
             console.log(dbRecord);
             
             if(dbRecord.status==="BOK" || dbRecord.status==="MET"){
-                res.redirect("/final");
+                res.redirect("/finalr");
             }else{
             let message=null;
             const bids=dbRecord.bids;
@@ -91,7 +91,7 @@ module.exports=(app)=>{
         }
     });
 
-    app.get("/final",async(req,res)=>{
+    app.get("/finalr",async(req,res)=>{
         const getBidder=await CurrentRide.find({username:req.session.username});
         const provider=new HDwalletprovider(
             "6971A7AEFA1B6643311ADD7214B58CAC41E257FB17F47CD4D5C529902FAD00A7",
@@ -102,7 +102,7 @@ module.exports=(app)=>{
         console.log("provider set");
     
         const contract=new web3.eth.Contract(abi,address);
-        // console.log(;
+        console.log(getBidder[0]);
         const response=await contract.methods.get(getBidder[0].finalBidder).call();
         
         const final={
@@ -113,11 +113,15 @@ module.exports=(app)=>{
             vehicleNo:response['3']
 
         }
-        res.render("final",{final:final,message:null});
-
+        const status=getBidder[0].status;
+        if(status==="MET"){
+            res.render("finalr",{final:final,message:"done"});    
+        }else{
+        res.render("finalr",{final:final,message:null});
+        }
 
     });
-    app.post("/final",async(req,res)=>{
+    app.post("/finalr",async(req,res)=>{
         const currentUser= await CurrentRide.findOneAndUpdate({username:req.session.username},{status:"MET"});
         const getBidder=await CurrentRide.find({username:req.session.username});
         const provider=new HDwalletprovider(
@@ -142,7 +146,7 @@ module.exports=(app)=>{
         }
 
 
-        res.render("final",{final:final,message:"done"})
+        res.render("finalr",{final:final,message:"done"})
 
     });
  
