@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bignumber.js": "^9.0.0",
     "body-parser": "^1.18.3",
     "connect-mongo": "^2.0.3",
     "dotenv": "^7.0.0",

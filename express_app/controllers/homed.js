@@ -65,10 +65,6 @@ module.exports=(app)=>{
         const insertValue=await CurrentRide.findOneAndUpdate({username:customerUsername},{$push:{bids:bid}});
         console.log(insertValue);
         res.redirect("/homed");
-<<<<<<< HEAD
-
-=======
->>>>>>> fe4ea9ab67c4836cad934d97cbc8698df11b4326
     });  
 
 
