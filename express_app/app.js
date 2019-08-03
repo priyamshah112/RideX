@@ -58,7 +58,8 @@ app.get("/",async (req,res)=>{
 });
 
 app.get("/signup",async(req,res)=>{
-    res.render("/sign");
+    
+    res.render("sign");
 });
 
 
