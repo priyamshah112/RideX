@@ -19,10 +19,6 @@ module.exports=(app)=>{
                 console.log(findExisting);
 
                 if(findExisting.length===0){
-<<<<<<< HEAD
-                const allRecords=await CurrentRide.find({});
-                    res.render("homed",{rides:allRecords});
-=======
                     const checkFinal=await CurrentRide.find({finalBidder:req.session.username});
                     if(checkFinal.length===0){
                         const allRecords=await CurrentRide.find({});
@@ -34,7 +30,6 @@ module.exports=(app)=>{
                 }else{
                     const currentBid=findExisting[0];
                     res.render("dbid",{from:currentBid.from,to:currentBid.to,status:"pending"});
->>>>>>> e05b1d3889263fc275f6e39c3d1e5de166c17a1a
                 }
                 else{
                     //avl means driver has bidded for that ride
