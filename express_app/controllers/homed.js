@@ -175,13 +175,14 @@ module.exports=(app)=>{
         try{
             var payment= await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex')).on('receipt', console.log);
             
-            const response=await contract.methods.setFinalBid(req.session.username,req.body.username).send({
-                from:addresss
+            contract.methods.setFinalBid(req.session.username,req.body.username).send({
+                from:"0x2248d96D13198CC52274f30F029C241c87b5a23c"
+            }).then((response)=>{
+                console.log(response);
             });
             
-            console.log(response);
             const deleteAuction = await CurrentRide.findOneAndDelete({username:req.body.username});
-            console.log(deleteAuction);
+            
             res.render("payed",{fare:fare,from:deleteAuction.from,to:deleteAuction.to});
         }
         catch(err){
