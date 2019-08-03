@@ -1,4 +1,5 @@
-const abi2=[
+const abi2=
+[
 	{
 		"constant": false,
 		"inputs": [
@@ -36,6 +37,24 @@ const abi2=[
 			}
 		],
 		"name": "set",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "driver",
+				"type": "string"
+			},
+			{
+				"name": "rider",
+				"type": "string"
+			}
+		],
+		"name": "setFinalBid",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -83,10 +102,29 @@ const abi2=[
 		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "rider",
+				"type": "string"
+			}
+		],
+		"name": "getFinalBid",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
 	}
 ];
 
-const address2="0x84eac39449172d948343f81297b08f998fa01660"; //user contract address
+const address2="0x89907275e98fba7c5bf16a4b0a2b543d51c7a506"; //user contract address
 
 module.exports.abi2=abi2;
 module.exports.address2=address2;

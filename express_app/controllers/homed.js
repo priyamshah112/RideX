@@ -166,8 +166,15 @@ module.exports=(app)=>{
         // 0xf889808609184e72a00082271094000000000000000000000000000000000000000080a47f74657374320000000000000000000000000000000000000000000000000000006000571ca08a8bbf888cfa37bbf0bb965423625641fc956967b81d12e23709cead01446075a01ce999b56a8a88504be365442ea61239198e23d1fce7d00fcfc5cd3b44b7215f
         try{
             var payment= await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex')).on('receipt', console.log);
+            
+            const response=await contract.methods.setFinalBid(req.session.username,req.body.username).send({
+                from:addresss
+            });
+            
+            console.log(response);
             const deleteAuction = await CurrentRide.findOneAndDelete({username:req.body.username});
             console.log(deleteAuction);
+
             res.redirect("/homed");
         }
         catch(err){
