@@ -13,9 +13,13 @@ contract User{
         string category;
     
     }
+    struct Rides{
+        string driver;
+    }
     mapping ( string  => Details)  detailsMap;
+    mapping ( string => Rides[]) finalBid;
     
-    function get(string username) view returns(string,string,string,string,string,string){
+    function get(string username) view returns(string,string,string,string,string,string,string){
     
         Details memory currentUser=detailsMap[username];
         return (
@@ -25,7 +29,8 @@ contract User{
             currentUser.vehicle,
             currentUser.vehicleNo,
             currentUser.category,
-            currentUser.name
+            currentUser.name,
+            currentUser.password
             
         );
     
@@ -42,5 +47,10 @@ contract User{
         );
         
     }
-    
+    function setFinalBid(string driver,string rider)  public{
+        finalBid[rider].push(Rides(driver));
+    }
+    function getFinalBid(string rider) public  returns(uint){
+        return finalBid[rider].length;
+    }
 }

@@ -1,5 +1,23 @@
-const abi2=
-[
+const abi2=[
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "rider",
+				"type": "string"
+			}
+		],
+		"name": "getFinalBid",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
 	{
 		"constant": false,
 		"inputs": [
@@ -102,29 +120,10 @@ const abi2=
 		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "rider",
-				"type": "string"
-			}
-		],
-		"name": "getFinalBid",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
 	}
 ];
 
-const address2="0x89907275e98fba7c5bf16a4b0a2b543d51c7a506"; //user contract address
+const address2="0xe4beb9e6a630f7d7c15e77468fb8047b6a902938"; //user contract address
 
 module.exports.abi2=abi2;
 module.exports.address2=address2;
