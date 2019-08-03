@@ -29,7 +29,14 @@ module.exports=(app)=>{
                   
                 }else{
                     const currentBid=findExisting[0];
-                    res.render("dbid",{from:currentBid.from,to:currentBid.to,status:"pending"});
+                    let value;
+                    for(var i=0;i<currentBid.bids.length;i++){
+                        if(bidder=req.session.username){
+                            value=currentBid.bids[i].value;
+                        }
+
+                    }
+                    res.render("dbid",{from:currentBid.from,to:currentBid.to,value:value,status:"pending"});
                 }
 
                 
@@ -56,6 +63,7 @@ module.exports=(app)=>{
         const contract=new web3.eth.Contract(abi,address);
     
         const response=await contract.methods.get(req.session.username).call();
+        console.log(value,response);
         const bid={
             value:value,
             bidder:req.session.username,
@@ -174,8 +182,7 @@ module.exports=(app)=>{
             console.log(response);
             const deleteAuction = await CurrentRide.findOneAndDelete({username:req.body.username});
             console.log(deleteAuction);
-
-            res.redirect("/homed");
+            res.render("payed",{fare:fare,from:deleteAuction.from,to:deleteAuction.to});
         }
         catch(err){
             console.log(err);

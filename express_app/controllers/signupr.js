@@ -67,7 +67,12 @@ module.exports=(app)=>{
         req.session.username=username;
         req.session.privateKey=privateKey;
         req.session.userType=userType;
+<<<<<<< HEAD
         
+=======
+
+
+>>>>>>> f822b5808bee90f46a769ee9f0fe438dfdd932d0
         res.redirect("/homer");
         
 });

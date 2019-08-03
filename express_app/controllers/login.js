@@ -15,8 +15,25 @@ const Profiles = require('../models/Profiles');
 
 module.exports=(app)=>{
     
+app.get("/login",async (req,res)=>{
+        
+    if(req.session.username!==undefined)
+    {
+        console.log(req.session.userType);
+        if(req.session.userType==="Driver"){
+            res.redirect("/homed");
+        }else{
+            res.redirect("/homer");
+        }
 
-    app.post("/",async (req,res)=>{
+    }
+    else{
+        res.render("login",{message:null});
+    }
+
+});
+
+    app.post("/login",async (req,res)=>{
 
         const username=req.body.email;
         const password=req.body.password;
