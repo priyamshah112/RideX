@@ -64,12 +64,14 @@ module.exports=(app)=>{
         }
         const insertValue=await CurrentRide.findOneAndUpdate({username:customerUsername},{$push:{bids:bid}});
         console.log(insertValue);
+        res.redirect("/homed");
 
     });  
 
 
     app.get("/finald",async(req,res)=>{
         if(req.session.username!==undefined){
+ 
         const checkFinal=await CurrentRide.find({finalBidder:req.session.username});
         const provider=new HDwalletprovider(
             "6971A7AEFA1B6643311ADD7214B58CAC41E257FB17F47CD4D5C529902FAD00A7",
