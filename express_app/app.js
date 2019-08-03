@@ -11,7 +11,6 @@ const signupd=require("./controllers/signupd");
 const login=require("./controllers/login");
 const homer=require("./controllers/homer");
 const homed=require("./controllers/homed");
-const auction=require("./controllers/auction");
 const test=require("./controllers/test");
 
 const abi=require("./user_contract").abi2;
@@ -70,5 +69,5 @@ signupd(app);
 login(app);
 homer(app);
 homed(app);
-auction(app);
+
 

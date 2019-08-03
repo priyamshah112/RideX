@@ -65,7 +65,10 @@ module.exports=(app)=>{
         const insertValue=await CurrentRide.findOneAndUpdate({username:customerUsername},{$push:{bids:bid}});
         console.log(insertValue);
         res.redirect("/homed");
+<<<<<<< HEAD
 
+=======
+>>>>>>> fe4ea9ab67c4836cad934d97cbc8698df11b4326
     });  
 
 
@@ -165,10 +168,15 @@ module.exports=(app)=>{
         
         console.log(serializedTx.toString('hex'),"serialized");
         // 0xf889808609184e72a00082271094000000000000000000000000000000000000000080a47f74657374320000000000000000000000000000000000000000000000000000006000571ca08a8bbf888cfa37bbf0bb965423625641fc956967b81d12e23709cead01446075a01ce999b56a8a88504be365442ea61239198e23d1fce7d00fcfc5cd3b44b7215f
-        
-        var payment= await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex')).on('receipt', console.log);
-        console.log(payment,"payment");
-
+        try{
+            var payment= await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex')).on('receipt', console.log);
+            const deleteAuction = await CurrentRide.findOneAndDelete({username:req.body.username});
+            console.log(deleteAuction);
+            res.redirect("/homed");
+        }
+        catch(err){
+            console.log(err);
+        }
     });
 
  

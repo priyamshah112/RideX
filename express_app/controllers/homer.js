@@ -87,7 +87,7 @@ module.exports=(app)=>{
             const resp=await CurrentRide.findOneAndUpdate({username:req.session.username},{finalBidder:bidder,finalValue:value,status:"BOK",$set:{bids:[]}});
             console.log(resp);
             
-            res.redirect("/final");
+            res.redirect("/finalr");
         }
     });
 
