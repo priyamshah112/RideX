@@ -1,6 +1,6 @@
 <p align="center">
   <a href="" rel="noopener">
- <img width=300px src="./express_app/public/assests/logocc.png" alt="Ridex-logo"></a>
+ <img width=300px src="./express_app/public/assests/logoRidex.png" alt="Ridex-logo"></a>
 </p>
 
 <h3 align="center">Decentralized Taxi System</h3>
