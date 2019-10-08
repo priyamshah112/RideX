@@ -11,6 +11,14 @@
 </div>
 
 ------------------------------------------
+### Medium Articles
+<a href="https://medium.com/@someshdesign/ridex-taxi-service-on-ethereum-blockchain-adb077fc818c" target="_blank">RideX | Taxi service on Ethereum Blockchain</a>
+<br>
+<a href="https://uxplanet.org/ridex-taxi-service-on-ethereum-blockchain-fecee1879a23" target="_blank">RideX | Taxi service on Ethereum Blockchain — a Design case study</a>
+
+
+
+------------------------------------------
 ### Solution
 
 - `Decentralization` This platform will remove the centralized transaction fee (payment gateway)and also the platform fee (uber or ola) and allows drivers and commuters to register directly. 
@@ -33,7 +41,7 @@
 <h3 > RideX </h3>
 <br>
 <p align="center">
-<img src ="./assets/ridex.gif" width = 500px>
+<img src ="RideX.gif" width = 500px>
 </p>
 
 </div>
